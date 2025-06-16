@@ -444,10 +444,6 @@ body.darkening {
   white-space: nowrap;
 }
 
-/* 다크닝 효과 강화 */
-body.darkening {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-}
 
 
 /* 슬롯 컨테이너 숨김 */
