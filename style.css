@@ -1,0 +1,531 @@
+/*  st */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {  color: red;  background-color: #fffb00b6;}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: #f7f7f7;
+  color: #222;
+  font-family: 'Galmuri11', sans-serif;
+  overflow: hidden;
+}
+
+body.darkening {
+  background: #ffe5e5;
+  transition: background 1s ease;
+}
+
+.all-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(assets/bg-memo.png);
+  border: 1px solid black;
+  position: relative;
+}
+
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+
+  /* left: 35%; */
+  background-color: #fffb00;
+}
+
+.logo-container img {
+  width: 500px;
+  height: auto;
+  bottom: 0%;
+}
+
+.cam-container {
+  position: absolute;
+  top: 20%;
+  left: 65%;
+  width: 600px;
+  height: 700px;
+  background: #ffffff89;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.cam-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.program-header {
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  font-weight: bold;
+  user-select: none;
+  border-radius: 8px 8px 0 0;
+}
+
+.cam-info {
+  padding: 12px;
+  font-size: 0.9rem;
+  background: #f8f8f8;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+/* .mission-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  gap: 16px;
+  width: 500px;
+  padding: 20px;
+}
+
+
+.mission {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  gap: 12px;
+} */
+
+.mission-container {
+  position: absolute;
+  top: 15%;
+  left: 50px;
+  display: flex;
+
+  background-color: rgba(255, 255, 0, 0.392);
+  padding: 2%;
+
+  gap: 40px;
+}
+
+.mission-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  width: 400px;
+}
+
+.mission {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border: 2px solid #fff700;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  gap: 12px;
+}
+
+
+.mission:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(207, 207, 207, 0.4);
+  border-color: #fff700;
+}
+
+.mission img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.mission p {
+  font-size: 0.95rem;
+  margin: 0;
+  color: #333;
+}
+
+
+
+.mission.locked {
+  opacity: 0.01;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+.mission.cleared {
+  background: #fbffb296;
+  border-color: #929a01b0;
+  opacity: 0.8;
+}
+
+.mission.cleared::after {
+  content: "✓";
+  margin-left: auto;
+  color: white;
+  background: #000000;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.mission.cleared:hover {
+  transform: translateY(0);
+}
+
+.diary-container {
+  position: absolute;
+  top: calc(15% + 550px);
+  left: 50px;
+  width: calc(400px * 2 + 40px);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px;
+  background: #ff9bde90;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 500;
+}
+
+.memo-note {
+  flex: 0 0 auto;
+  width: 160px;
+  background-color: #ffd8eb;
+  padding: 12px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #333;
+  border-radius: 12px;
+  z-index: 10000;
+
+  min-width: 800px;
+  max-width: 900px;
+  min-height: 500px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  user-select: none;
+  border-radius: 8px 8px 0 0;
+  height: 30px;
+}
+
+.modal-header span:first-child {
+  font-size: 1rem;
+}
+
+#character-display img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-top: auto;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.modal-body {
+  padding: 24px;
+  text-align: center;
+}
+
+.modal-body p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.confirm-btn {
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.756);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  font-family: 'Galmuri11';
+}
+
+.confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 50px;
+  background: linear-gradient(180deg, #dcdcdc, #c0c0c0);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 0.9rem;
+  z-index: 20;
+  border-top: 1px solid #999;
+}
+
+.taskbar-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  cursor: pointer;
+  color: #222;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.taskbar-icon:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.mission-message {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 16px 24px;
+  display: none;
+  z-index: 9999;
+  max-width: 80%;
+  text-align: center;
+}
+
+.slide-menu {
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  z-index: 50;
+  transition: bottom 0.3s ease-in-out;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  border-radius: 12px 12px 0 0;
+  border: 2px solid #333;
+}
+
+.slide-menu.open {
+  bottom: 50px;
+}
+
+.slide-menu button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slide-menu button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+#calendar-modal {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  background: white;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 10000;
+  display: none;
+  border: 2px solid #333;
+}
+
+#calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px;
+}
+
+#calendar-grid div {
+  background: #f8f9fa;
+  padding: 16px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: background 0.2s;
+}
+
+#calendar-grid div:hover {
+  background: #e9ecef;
+}
+
+#calendar-grid .complete {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+/* 툴팁 스타일 */
+#cam-tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  pointer-events: none;
+  z-index: 99999;
+  white-space: nowrap;
+}
+
+/* 다크닝 효과 강화 */
+body.darkening {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+}
+
+
+/* 슬롯 컨테이너 숨김 */
+#save-slot-container,
+#load-slot-container {
+  display: none;
+}
+
+
+
+/* 메모지 모달 스티커 */
+.diary-modal {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  background: #ffe0f0;
+  border: 2px solid #ffaad4;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  font-family: 'Galmuri11', sans-serif;
+  z-index: 9999;
+}
+
+
+.diary-modal h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.diary-modal p {
+  font-size: 0.9rem;
+  white-space: pre-line;
+  color: #333;
+  flex: 1;
+}
+
+.diary-modal .close-btn {
+  align-self: flex-end;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* ====================== 미션 css ========================= */
+
+/* 미니게임1 */
+.break-btn:hover {
+  transform: scale(1.1);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* 모달 뒷배경 오버레이 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* Start 메뉴 버튼 */
+.slide-menu-btn {
+  width: 100%;
+  font-family: 'Galmuri11';
+  font-size: 1.2rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+}

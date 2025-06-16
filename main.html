@@ -1,0 +1,124 @@
+<!-- <!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Study With Me! - Main</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+</head>
+<body class="main-bg">
+  <div class="logo-container">
+    <img src="assets/SWM-logo.png" alt="스터디윗미 로고">
+  </div>
+  <div class="start-text" id="startBtn">게임 시작 →</div>
+  <div class="load-text" id="loadBtn">불러오기 ↓</div>
+  <div class="message-box" id="messageBox"></div>
+
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const loadBtn = document.getElementById("loadBtn");
+    const messageBox = document.getElementById("messageBox");
+    const message = "study with me (과시에용) 는 청사당을 위한 학습 지원 프로그램이에요!";
+
+    function showTypingMessage(text, callback) {
+      let i = 0;
+      messageBox.textContent = "";
+      messageBox.style.display = "block";
+      messageBox.classList.add("fade-in");
+      const interval = setInterval(() => {
+        messageBox.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          if (callback) setTimeout(callback, 1500);
+        }
+      }, 50);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const hasSave = localStorage.getItem("save_slot_1") || localStorage.getItem("save_slot_2") || localStorage.getItem("save_slot_3");
+      if (hasSave) loadBtn.classList.add("active");
+    });
+
+    startBtn.addEventListener("click", () => {
+      startBtn.style.display = "none";
+      loadBtn.style.display = "none";
+      showTypingMessage(message, () => {
+        window.location.href = "login.html";
+      });
+    });
+
+    loadBtn.addEventListener("click", () => {
+      window.location.href = "game.html";
+    });
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study With Me - 끝</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #2b0000;
+      color: #111;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+    #final-error {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000;
+      font-size: 2rem;
+      background: #ff0000;
+      padding: 2rem 3rem;
+      border: 2px solid #000;
+      border-radius: 12px;
+      display: none;
+      z-index: 9999;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255,0,0,0.3),
+        rgba(255,0,0,0.3) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: glitch 0.2s infinite;
+      z-index: 1;
+    }
+    @keyframes glitch {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-2px, 2px); }
+      100% { transform: translate(2px, -2px); }
+    }
+  </style>
+</head>
+<body onclick="showFinalError()">
+  <div id="final-error">Error: 복구할 수 없는 손상입니다.</div>
+
+  <script>
+    function showFinalError() {
+      const errorBox = document.getElementById("final-error");
+      errorBox.style.display = "block";
+      setTimeout(() => {
+        errorBox.style.display = "none";
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

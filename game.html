@@ -1,0 +1,74 @@
+    <!-- game.html -->
+    <!DOCTYPE html>
+    <html lang="ko">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Study With Me! - Game</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <div class="logo-container">
+            <img src="assets/SWM-logo.png" alt="스터디윗미 로고"/>
+        </div>
+        <div class="all-container">
+
+
+            <!-- <div id="mission-container" class="mission-container"></div> -->
+            <div class="mission-container">
+                <p>To-Do List</p>
+                <div class="mission-column left" id="mission-left"></div>
+                <div class="mission-column right" id="mission-right"></div>
+            </div>
+            <div id="diary-container" class="diary-container"></div>
+            <div id="mission-message" class="mission-message"></div>
+
+            <div class="cam-container" id="cam">
+                <div class="program-header">CAM</div>
+                <div class="cam-info">
+                    <span id="cam-name"></span><br />
+                    <span id="stress">스트레스: 0</span>
+                </div>
+                <div>
+                    <div id="character-display" style="font-size: 4rem;">😊</div>
+                </div>
+                <div id="tooltip" class="tooltip"></div>
+            </div>
+
+            <div class="taskbar">
+                <div id="start-btn" class="taskbar-icon">📋 Start</div>
+                <div id="calendar" class="taskbar-icon">📅 Calendar</div>
+            </div>
+
+            <div id="start-menu" class="slide-menu">
+                <button id="home-btn">🏠 홈으로 나가기</button>
+                <button id="save-btn">💾 저장하기</button>
+                <button id="load-btn">📂 불러오기</button>
+            </div>
+
+            <div id="save-slot-container">
+                <button>1번 슬롯</button>
+                <button>2번 슬롯</button>
+                <button>3번 슬롯</button>
+            </div>
+
+            <div id="load-slot-container">
+                <button>1번 슬롯</button>
+                <button>2번 슬롯</button>
+                <button>3번 슬롯</button>
+            </div>
+
+            <div id="calendar-modal" class="modal">
+                <div class="modal-header">
+                    <span>📅 캘린더</span>
+                    <span class="close-btn" id="close-calendar">✕</span>
+                </div>
+                <div id="calendar-grid" class="calendar-grid"></div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+
+    </html>
